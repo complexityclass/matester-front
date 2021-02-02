@@ -72,9 +72,11 @@ export default {
             headers: { 'Authorization': this.basicAuth }
           }).then(friendsResponse => {
             console.log('friendsResponse', friendsResponse);
-            friendsResponse.data.forEach(obj => {
-              this.friends.push(obj.login);
-            })
+            if (friendsResponse.data && friendsResponse.data.length !== 0) {
+              friendsResponse.data.forEach(obj => {
+                this.friends.push(obj.login);
+              })
+            }
             this.isLoaded = true;
           })
         }
