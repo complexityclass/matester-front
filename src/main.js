@@ -26,5 +26,20 @@ Vue.prototype.$http = axios;
 new Vue({
   router,
   store: new Vuex.Store(stores),
+  mounted() {
+    this.redirect();
+  },
+  methods: {
+    redirect() {
+      axios.interceptors.response.use(function (response) {
+        return response
+      }, function (error) {
+        if (error.response.status === 401) {
+          router.push('/login');
+        }
+        return Promise.reject(error)
+      })
+    }
+  },
   render: h => h(App),
 }).$mount('#app')

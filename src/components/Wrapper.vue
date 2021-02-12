@@ -42,6 +42,7 @@ header.header {
   display: flex;
   padding-top: 20px;
   padding-bottom: 20px;
+  height: 130px;
 }
 .common-content {
   display: flex;

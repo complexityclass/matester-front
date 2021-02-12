@@ -37,9 +37,14 @@ export default {
     }
   },
   mounted() {
+    this.removeToken();
     this.initValues();
   },
   methods: {
+    removeToken() {
+      localStorage.setItem('matesterLogin', '');
+      localStorage.setItem('matesterBasicAuth', '');
+    },
     initValues() {
       this.fields.forEach(field => {
         this.values[field.id] = "";
