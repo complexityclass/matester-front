@@ -55,6 +55,9 @@ export default {
   computed: {
     basicAuth() {
       return localStorage.getItem('matesterBasicAuth');
+    },
+    userLogin() {
+      return localStorage.getItem('matesterLogin');
     }
   },
   created() {
@@ -67,7 +70,11 @@ export default {
       }).then(usersResponse => {
         console.log('usersResponse', usersResponse)
         if (usersResponse.data && usersResponse.data.length !== 0) {
-          this.users = usersResponse.data;
+          usersResponse.data.forEach(el => {
+            if (el.login !== this.userLogin) {
+              this.users.push(el);
+            }
+          })
           axios.get(`https://matester23.herokuapp.com/friends`, {
             headers: { 'Authorization': this.basicAuth }
           }).then(friendsResponse => {
